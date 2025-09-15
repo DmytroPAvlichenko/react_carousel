@@ -90,12 +90,12 @@ class App extends React.Component<{}, State> {
             <input
               id="itemId"
               type="number"
-              min={50}
+              min={10}
               max={500}
               value={itemWidth}
               onChange={event => {
                 const v = Math.max(
-                  50,
+                  1,
                   Math.floor(Number(event.target.value) || 0),
                 );
 
