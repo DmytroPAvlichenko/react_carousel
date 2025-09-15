@@ -27,8 +27,11 @@ const Carousel: React.FC<Props> = ({
 
   useEffect(() => {
     const clamped = Math.max(-maxTranslate, Math.min(0, transform));
-    if (clamped !== transform) setTransform(clamped);
-    }, [transform, maxTranslate]);
+
+    if (clamped !== transform) {
+      setTransform(clamped);
+    }
+  }, [transform, maxTranslate]);
 
   function trans() {
     if (transform <= -maxTranslate) {

@@ -41,31 +41,30 @@ class App extends React.Component<{}, State> {
     return (
       <div className="App">
         {/* eslint-disable-next-line */}
-        <h1>Carousel <span data-cy="title">with {images.length} images</span></h1>
+        <h1 data-cy="title" > Carousel with {images.length} images</h1>
         <div className="inputs">
-          <label
-           className="inputs__item"
-           htmlFor="stepId">
+          <label className="inputs__item" htmlFor="stepId">
             Step
             <input
-              
               id="stepId"
               min={1}
               max={10}
               type="number"
               value={step}
               onChange={event => {
-                const v = Math.max(1, Math.floor(Number(event.target.value)|| 0));
+                const v = Math.max(
+                  1,
+                  Math.floor(Number(event.target.value) || 0),
+                );
+
                 if (Number.isFinite(v)) {
                   this.setState({ step: v });
                 }
               }}
             />
           </label>
-          <label
-           className="inputs__item"
-           htmlFor="frameId"
-          >
+
+          <label className="inputs__item" htmlFor="frameId">
             FrameSize
             <input
               id="frameId"
@@ -74,46 +73,54 @@ class App extends React.Component<{}, State> {
               min={1}
               max={10}
               onChange={event => {
-                const v = Math.max(1, Math.floor(Number(event.target.value)|| 0));
+                const v = Math.max(
+                  1,
+                  Math.floor(Number(event.target.value) || 0),
+                );
+
                 if (Number.isFinite(v)) {
                   this.setState({ frameSize: v });
                 }
               }}
             />
           </label>
-          <label
-          className="inputs__item"
-          htmlFor="itemId"
-          >
+
+          <label className="inputs__item" htmlFor="itemId">
             itemWidth
             <input
               id="itemId"
               type="number"
-              min={1}
-              max={400}
+              min={50}
+              max={500}
               value={itemWidth}
               onChange={event => {
-                const v = Math.max(1, Math.floor(Number(event.target.value)|| 0));
+                const v = Math.max(
+                  50,
+                  Math.floor(Number(event.target.value) || 0),
+                );
+
                 if (Number.isFinite(v)) {
                   this.setState({ itemWidth: v });
                 }
               }}
             />
           </label>
-          <label
-          className="inputs__item" 
-          htmlFor="animaId"
-          >
+
+          <label className="inputs__item" htmlFor="animaId">
             animationDuration
             <input
-            className="item"
+              className="item"
               id="animaId"
               type="number"
               value={animationDuration}
               min={100}
               max={10000}
               onChange={event => {
-                const v = Math.max(100, Math.floor(Number(event.target.value)|| 0));
+                const v = Math.max(
+                  100,
+                  Math.floor(Number(event.target.value) || 0),
+                );
+
                 if (Number.isFinite(v)) {
                   this.setState({ animationDuration: v });
                 }
