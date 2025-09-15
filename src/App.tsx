@@ -47,8 +47,6 @@ class App extends React.Component<{}, State> {
             Step
             <input
               id="stepId"
-              min={1}
-              max={10}
               type="number"
               value={step}
               onChange={event => {
@@ -58,7 +56,7 @@ class App extends React.Component<{}, State> {
                 );
 
                 if (Number.isFinite(v)) {
-                  this.setState({ step: v });
+                  this.setState({ step: Math.min(10, v) });
                 }
               }}
             />
@@ -70,16 +68,15 @@ class App extends React.Component<{}, State> {
               id="frameId"
               type="number"
               value={frameSize}
-              min={1}
-              max={10}
               onChange={event => {
                 const v = Math.max(
                   1,
                   Math.floor(Number(event.target.value) || 0),
                 );
+                
 
                 if (Number.isFinite(v)) {
-                  this.setState({ frameSize: v });
+                  this.setState({ frameSize: Math.min(10, v) });
                 }
               }}
             />
@@ -90,8 +87,6 @@ class App extends React.Component<{}, State> {
             <input
               id="itemId"
               type="number"
-              min={10}
-              max={500}
               value={itemWidth}
               onChange={event => {
                 const v = Math.max(
@@ -100,7 +95,7 @@ class App extends React.Component<{}, State> {
                 );
 
                 if (Number.isFinite(v)) {
-                  this.setState({ itemWidth: v });
+                  this.setState({ itemWidth: Math.min(500, v)});
                 }
               }}
             />
@@ -113,16 +108,14 @@ class App extends React.Component<{}, State> {
               id="animaId"
               type="number"
               value={animationDuration}
-              min={100}
-              max={10000}
               onChange={event => {
                 const v = Math.max(
-                  100,
+                  1,
                   Math.floor(Number(event.target.value) || 0),
                 );
 
                 if (Number.isFinite(v)) {
-                  this.setState({ animationDuration: v });
+                  this.setState({ animationDuration: Math.min(5000, v) });
                 }
               }}
             />
