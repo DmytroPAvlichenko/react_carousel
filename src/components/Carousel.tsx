@@ -1,40 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Carousel.scss';
 
 type Props = {
-  images: string[];
-  step: number;
-  frameSize: number;
-  itemWidth: number;
-  animationDuration: number;
-  infinite: boolean;
+  images?: string[];
+  step?: number;
+  frameSize?: number;
+  itemWidth?: number;
+  animationDuration?: number;
+  infinite?: boolean;
 };
 
 const Carousel: React.FC<Props> = ({
-  images,
-  step,
-  frameSize,
-  itemWidth,
-  animationDuration,
+  images=['./img/1.png','./img/2.png'],
+  step = 3,
+  frameSize = 3,
+  itemWidth = 130,
+  animationDuration = 1000,
   infinite = false,
 }) => {
   const frame = itemWidth * frameSize;
   const stepIcon = itemWidth * step;
-  const conteinerWith = itemWidth * images.length - frame;
-
+  const maxTranslate = Math.max(0, itemWidth * images.length - itemWidth * frameSize);
+  
   const [transform, setTransform] = useState(0);
-
-  if (transform < -conteinerWith) {
-    setTransform(-conteinerWith);
-  }
-
-  if (transform > 0) {
-    setTransform(0);
-  }
-
+  
+  useEffect(()=>{
+    if (transform < -maxTranslate) {
+      setTransform(-maxTranslate);
+    }
+    
+    if (transform > 0) {
+      setTransform(0);
+    }
+  })
+  
   function trans() {
-    if (transform <= -conteinerWith) {
-      setTransform(-conteinerWith);
+    if (transform <= -maxTranslate) {
+      setTransform(-maxTranslate);
       if (infinite) {
         setTransform(0);
 
@@ -48,7 +50,7 @@ const Carousel: React.FC<Props> = ({
   function transfer() {
     if (transform >= 0) {
       if (infinite) {
-        setTransform(-conteinerWith);
+        setTransform(-maxTranslate);
 
         return;
       }
@@ -95,7 +97,7 @@ const Carousel: React.FC<Props> = ({
         className="Carousel__button Carousel__button--next"
         data-cy="next"
         type="button"
-        disabled={!infinite && transform <= -conteinerWith}
+        disabled={!infinite && transform <= -maxTranslate}
         onClick={() => trans()}
       >
         Next

@@ -8,7 +8,7 @@ interface State {
   step: number;
   frameSize: number;
   itemWidth: number;
-  animaTionDuration: number;
+  animationDuration: number;
   infinite: boolean;
 }
 
@@ -30,12 +30,12 @@ class App extends React.Component<{}, State> {
     step: 3,
     frameSize: 3,
     itemWidth: 130,
-    animaTionDuration: 1000,
+    animationDuration: 1000,
     infinite: false,
   };
 
   render() {
-    const { images, step, frameSize, itemWidth, animaTionDuration, infinite } =
+    const { images, step, frameSize, itemWidth, animationDuration, infinite } =
       this.state;
 
     return (
@@ -46,6 +46,8 @@ class App extends React.Component<{}, State> {
           <label htmlFor="stepId">
             Step
             <input
+              min={1}
+              max={10}
               id="stepId"
               type="number"
               value={step}
@@ -60,6 +62,8 @@ class App extends React.Component<{}, State> {
               id="frameId"
               type="number"
               value={frameSize}
+              min={1}
+              max={10}
               onChange={event => {
                 this.setState({ frameSize: Number(event.target.value) });
               }}
@@ -81,19 +85,21 @@ class App extends React.Component<{}, State> {
             <input
               id="animaId"
               type="number"
-              value={animaTionDuration}
+              value={animationDuration}
               onChange={event => {
                 this.setState({
-                  animaTionDuration: Number(event.target.value),
+                  animationDuration: Number(event.target.value),
                 });
               }}
             />
           </label>
-          
-          <div className='inputs__select'> infinite
+
+          <div className="inputs__select">
+            {' '}
+            infinite
             <select
               onChange={event => {
-                this.setState({ infinite: event.target.value == 'true' });
+                this.setState({ infinite: event.target.value === 'true' });
               }}
             >
               <option value="false">false</option>
@@ -107,7 +113,7 @@ class App extends React.Component<{}, State> {
           step={step}
           frameSize={frameSize}
           itemWidth={itemWidth}
-          animationDuration={animaTionDuration}
+          animationDuration={animationDuration}
           infinite={infinite}
         />
       </div>

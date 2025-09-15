@@ -3,10 +3,11 @@
   flex-direction: column;
   width: 200px;
   gap: 10px;
+  box-sizing: border-box;
   
   &__select {
     display: flex;
     flex-direction: column;
-    width: 185px;
+    width: 92%;
   }
 }
