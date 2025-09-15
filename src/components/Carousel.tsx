@@ -11,7 +11,7 @@ type Props = {
 };
 
 const Carousel: React.FC<Props> = ({
-  images=['./img/1.png','./img/2.png'],
+  images = ['./img/1.png', './img/2.png'],
   step = 3,
   frameSize = 3,
   itemWidth = 130,
@@ -20,20 +20,16 @@ const Carousel: React.FC<Props> = ({
 }) => {
   const frame = itemWidth * frameSize;
   const stepIcon = itemWidth * step;
-  const maxTranslate = Math.max(0, itemWidth * images.length - itemWidth * frameSize);
-  
+  const maxStartIndex = Math.max(0, images.length - frameSize);
+  const maxTranslate = maxStartIndex * itemWidth;
+
   const [transform, setTransform] = useState(0);
-  
-  useEffect(()=>{
-    if (transform < -maxTranslate) {
-      setTransform(-maxTranslate);
-    }
-    
-    if (transform > 0) {
-      setTransform(0);
-    }
-  })
-  
+
+  useEffect(() => {
+    const clamped = Math.max(-maxTranslate, Math.min(0, transform));
+    if (clamped !== transform) setTransform(clamped);
+    }, [transform, maxTranslate]);
+
   function trans() {
     if (transform <= -maxTranslate) {
       setTransform(-maxTranslate);
